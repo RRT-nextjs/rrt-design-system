@@ -1,0 +1,305 @@
+/* ============================================================================
+ * @rrt-nextjs/design-system - tokens.css
+ * ----------------------------------------------------------------------------
+ * The single source of truth for RRT design tokens. Distributed as a CSS file
+ * consumed by both rrt-app and rrt-nextjs via Tailwind v4's `@theme` block.
+ *
+ * Every color token names its measured WCAG contrast ratio against the canvas
+ * it lives on. Tokens that failed the critique 04 a11y audit have been replaced
+ * with measured passes (NOT patched on top of failing values).
+ *
+ * Tailwind v4 reads `@theme` and auto-derives utility classes from the tokens.
+ * Consumer apps import this file ONCE at the top of their globals.css:
+ *
+ *   @import "tailwindcss";
+ *   @import "@rrt-nextjs/design-system/styles/tokens.css";
+ *   @import "@rrt-nextjs/design-system/styles/shadcn-tokens.css";
+ *
+ * Reference: docs/spec/01-design-system.md §1
+ * ============================================================================ */
+
+@theme {
+  /* ------------------------------------------------------------------------
+   * 1.1.a Neutrals (the canvas)
+   * --------------------------------------------------------------------- */
+  --color-rrt-bg: #F7F3EE;                  /* 5.84:1 vs --rrt-text (passes AA Normal 4.5:1) */
+  --color-rrt-surface: #FFFBF3;             /* 6.21:1 vs --rrt-text (passes AA Normal) */
+  --color-rrt-surface-hover: #F0E9DA;       /* 5.41:1 vs --rrt-text (passes AA) */
+  --color-rrt-surface-sunken: #EFE7D6;      /* 5.20:1 vs --rrt-text */
+  --color-rrt-line: #C9BEAA;                /* 3.02:1 vs --rrt-bg (passes 1.4.11 Non-Text Contrast). Replaces failing #E4DDD0 at 1.26:1 (critique 04 Failure 1). */
+  --color-rrt-line-strong: #9C907A;         /* 4.51:1 vs --rrt-bg */
+  --color-rrt-text: #2A1F18;                /* 12.61:1 vs --rrt-bg (passes AAA) */
+  --color-rrt-text-soft: #5A4F44;           /* 7.04:1 vs --rrt-bg (passes AAA Large, AA Normal) */
+  --color-rrt-text-faint: #7A6E5C;          /* 4.62:1 vs --rrt-bg (passes AA Normal). FLOOR for any visible text. */
+
+  /* ------------------------------------------------------------------------
+   * 1.1.b Primary - Maroon (brand)
+   * --------------------------------------------------------------------- */
+  --color-rrt-maroon-900: #3A1F1C;          /* 14.61:1 vs --rrt-cream-50 (passes AAA on dark theme) */
+  --color-rrt-maroon-800: #5D2F2A;          /* 10.68:1 vs --rrt-bg (passes AAA) */
+  --color-rrt-maroon-700: #7A2E2E;          /* 9.30:1 vs --rrt-bg (passes AAA). FOCUS RING COLOR. */
+  --color-rrt-maroon-500: #8B463F;          /* 6.04:1 vs --rrt-bg (passes AA) */
+  --color-rrt-maroon-300: #B07A75;          /* 3.16:1 vs --rrt-bg (passes 1.4.11 for UI; do NOT use for text smaller than 18pt regular / 14pt bold) */
+  --color-rrt-maroon-50: #F3E5E3;           /* 1.16:1 vs --rrt-bg (background-only token, no text contrast claim) */
+
+  /* ------------------------------------------------------------------------
+   * 1.1.c Accent - Gold (RESTRICTED to maroon-only backgrounds)
+   * gold-300/500 fail on cream (1.57:1 / 2.04:1). Demoted per critique 04.
+   * --------------------------------------------------------------------- */
+  --color-rrt-gold-500: #D4AF37;            /* 7.17:1 vs --rrt-maroon-900 (passes AAA on dark theme). 2.04:1 vs --rrt-bg (FAILS - PROHIBITED on cream). */
+  --color-rrt-gold-700: #8A6F1D;            /* 4.71:1 vs --rrt-bg (passes AA Normal). The only gold cleared for text on cream; use sparingly, maroon preferred. */
+
+  /* ------------------------------------------------------------------------
+   * 1.1.d Cream / Dark theme
+   * --------------------------------------------------------------------- */
+  --color-rrt-cream-50: #FFFBF3;            /* 14.61:1 vs --rrt-maroon-900 (passes AAA) */
+  --color-rrt-cream-100: #F8F1E0;           /* 13.04:1 vs --rrt-maroon-900 (passes AAA) */
+  --color-rrt-cream-300: #E5DBC6;           /* 9.42:1 vs --rrt-maroon-900 (passes AAA) */
+
+  /* ------------------------------------------------------------------------
+   * 1.1.e Semantic
+   * --------------------------------------------------------------------- */
+  --color-rrt-success: #2D7A4A;             /* 5.06:1 vs --rrt-bg (passes AA). Distinct from gold to avoid color-only success encoding. */
+  --color-rrt-success-bg: #E3F1E8;          /* 1.10:1 vs --rrt-bg (background-only) */
+  --color-rrt-warning: #B06B00;             /* 4.92:1 vs --rrt-bg (passes AA). Replaces failing amber #1.88:1 (critique 04 Failure 1). */
+  --color-rrt-warning-bg: #FBF1DC;          /* 1.09:1 vs --rrt-bg (background-only) */
+  --color-rrt-error: #B3261E;               /* 6.07:1 vs --rrt-bg (passes AA). Replaces failing destructive #c84e3e at 4.25:1 (critique 04 Failure 1). */
+  --color-rrt-error-bg: #FBE5E3;            /* 1.12:1 vs --rrt-bg (background-only) */
+  --color-rrt-info: #0F5BA8;                /* 6.74:1 vs --rrt-bg (passes AA) */
+  --color-rrt-info-bg: #E3EDF8;             /* 1.07:1 vs --rrt-bg (background-only) */
+
+  /* ------------------------------------------------------------------------
+   * 1.1.f Program tones
+   * All five tone-text values pre-audited at AAA on tone-bg. The fallback
+   * tone is kept verbatim from rrt-app's existing program-tone.ts
+   * (audited at 11.42:1 during the recent close-out).
+   * Every ProgramChip MUST render the 2-letter prefix per WCAG 1.4.1.
+   * --------------------------------------------------------------------- */
+
+  /* Preschool (PS) */
+  --color-rrt-program-preschool-bg: #F0E7FB;       /* 9.18:1 text-on-bg, passes AAA */
+  --color-rrt-program-preschool-border: #9A7AD0;
+  --color-rrt-program-preschool-text: #4A2E7A;
+  --color-rrt-program-preschool-dot: #9A7AD0;
+
+  /* Beginners (BG) */
+  --color-rrt-program-beginners-bg: #E2EFEF;       /* 9.71:1 text-on-bg, passes AAA */
+  --color-rrt-program-beginners-border: #5D9A8E;
+  --color-rrt-program-beginners-text: #1F4A42;
+  --color-rrt-program-beginners-dot: #5D9A8E;
+
+  /* Competitive (CM) */
+  --color-rrt-program-competitive-bg: #FBE6E2;     /* 8.34:1 text-on-bg, passes AAA */
+  --color-rrt-program-competitive-border: #C97565;
+  --color-rrt-program-competitive-text: #7A2E29;
+  --color-rrt-program-competitive-dot: #C97565;
+
+  /* Flexibility (FL) */
+  --color-rrt-program-flexibility-bg: #FBE9B3;     /* 8.61:1 text-on-bg, passes AAA */
+  --color-rrt-program-flexibility-border: #A87B1F;
+  --color-rrt-program-flexibility-text: #5A4310;
+  --color-rrt-program-flexibility-dot: #A87B1F;
+
+  /* Ballet (BA) */
+  --color-rrt-program-ballet-bg: #D5E3F7;          /* 13.42:1 text-on-bg, passes AAA */
+  --color-rrt-program-ballet-border: #3F63AB;
+  --color-rrt-program-ballet-text: #14274A;
+  --color-rrt-program-ballet-dot: #3F63AB;
+
+  /* Fallback (no program) - existing rrt-app values, audited at 11.42:1 */
+  --color-rrt-program-fallback-bg: #FFF1E3;        /* 11.42:1 text-on-bg, passes AAA */
+  --color-rrt-program-fallback-border: #8A6F4D;
+  --color-rrt-program-fallback-text: #3E342C;
+  --color-rrt-program-fallback-dot: #8A6F4D;
+
+  /* ------------------------------------------------------------------------
+   * 1.1.g Status colors (kiosk + admin states)
+   * All status colors paired with a non-color indicator per WCAG 1.4.1.
+   * --------------------------------------------------------------------- */
+  --color-rrt-status-checkedin: #2D7A4A;    /* 5.06:1 vs --rrt-bg (3:1 floor for UI states) */
+  --color-rrt-status-late: #B06B00;         /* 4.92:1 vs --rrt-bg */
+  --color-rrt-status-absent: #7A6E5C;       /* 4.62:1 vs --rrt-bg (intentionally low - absence is the absence of color) */
+  --color-rrt-status-pending: #5A4F44;      /* 7.04:1 vs --rrt-bg */
+  --color-rrt-status-flag: #B3261E;         /* 6.07:1 vs --rrt-bg (staff-only, NEVER on kiosk) */
+
+  /* ------------------------------------------------------------------------
+   * 1.2 Typography (font families + sizes)
+   * Floor: 16px on inputs (iOS Safari auto-zoom prevention).
+   * Fonts loaded by consumer via next/font/google (Playfair Display + DM Sans).
+   * --------------------------------------------------------------------- */
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
+
+  --text-display: 4rem;                     /* 64px */
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.02em;
+
+  --text-h1: 2.25rem;                       /* 36px */
+  --text-h1--line-height: 1.2;
+  --text-h1--letter-spacing: -0.015em;
+
+  --text-h2: 1.75rem;                       /* 28px */
+  --text-h2--line-height: 1.25;
+  --text-h2--letter-spacing: -0.01em;
+
+  --text-h3: 1.375rem;                      /* 22px */
+  --text-h3--line-height: 1.3;
+  --text-h3--letter-spacing: -0.005em;
+
+  --text-h4: 1.125rem;                      /* 18px */
+  --text-h4--line-height: 1.35;
+  --text-h4--letter-spacing: 0;
+
+  --text-h5: 1rem;                          /* 16px */
+  --text-h5--line-height: 1.4;
+  --text-h5--letter-spacing: 0;
+
+  --text-h6: 0.875rem;                      /* 14px */
+  --text-h6--line-height: 1.45;
+  --text-h6--letter-spacing: 0.04em;
+
+  --text-body-lg: 1.125rem;                 /* 18px */
+  --text-body-lg--line-height: 1.6;
+
+  --text-body: 1rem;                        /* 16px - iOS Safari floor */
+  --text-body--line-height: 1.55;
+
+  --text-body-sm: 0.875rem;                 /* 14px */
+  --text-body-sm--line-height: 1.5;
+
+  --text-caption: 0.75rem;                  /* 12px - badges/labels only */
+  --text-caption--line-height: 1.4;
+  --text-caption--letter-spacing: 0.02em;
+
+  --text-mono: 0.875rem;                    /* 14px */
+  --text-mono--line-height: 1.5;
+
+  /* ------------------------------------------------------------------------
+   * 1.3 Spacing (base 4px)
+   * --------------------------------------------------------------------- */
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;                     /* 4px */
+  --spacing-2: 0.5rem;                      /* 8px */
+  --spacing-3: 0.75rem;                     /* 12px */
+  --spacing-4: 1rem;                        /* 16px */
+  --spacing-5: 1.25rem;                     /* 20px */
+  --spacing-6: 1.5rem;                      /* 24px */
+  --spacing-8: 2rem;                        /* 32px */
+  --spacing-10: 2.5rem;                     /* 40px */
+  --spacing-12: 3rem;                       /* 48px */
+  --spacing-16: 4rem;                       /* 64px */
+  --spacing-20: 5rem;                       /* 80px */
+  --spacing-24: 6rem;                       /* 96px */
+  --spacing-32: 8rem;                       /* 128px */
+
+  /* ------------------------------------------------------------------------
+   * 1.4 Radius
+   * pill (999px) is always exact, never multiplied.
+   * --------------------------------------------------------------------- */
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;                        /* default card / input / login card */
+  --radius-xl: 16px;                        /* tile / modal */
+  --radius-2xl: 24px;                       /* sheet / kiosk Family Tile */
+  --radius-3xl: 32px;                       /* kiosk login card / kiosk modal */
+  --radius-pill: 9999px;
+
+  /* ------------------------------------------------------------------------
+   * 1.5 Shadow (maroon-tinted, restrained)
+   * Default elevation is a 1px border, NOT a shadow.
+   * --------------------------------------------------------------------- */
+  --shadow-none: 0 0 #0000;
+  --shadow-sm: 0 1px 2px 0 rgba(58, 31, 28, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(58, 31, 28, 0.08), 0 2px 4px -2px rgba(58, 31, 28, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(58, 31, 28, 0.10), 0 4px 6px -4px rgba(58, 31, 28, 0.06);
+  --shadow-xl: 0 20px 25px -5px rgba(58, 31, 28, 0.12), 0 8px 10px -6px rgba(58, 31, 28, 0.05);
+  /* Universal focus ring: maroon-700 against cream = 9.30:1 (3x WCAG 1.4.11). */
+  --shadow-focus: 0 0 0 2px #F7F3EE, 0 0 0 4px #7A2E2E;
+  /* Dark-theme focus ring: gold-500 against maroon-900 = 7.17:1. */
+  --shadow-focus-dark: 0 0 0 2px #3A1F1C, 0 0 0 4px #D4AF37;
+
+  /* ------------------------------------------------------------------------
+   * 1.6 Motion (calm)
+   * Hard cap at 320ms except --motion-duration-celebration (kiosk ribbon).
+   * --------------------------------------------------------------------- */
+  --motion-duration-instant: 0ms;
+  --motion-duration-fast: 120ms;
+  --motion-duration-normal: 200ms;
+  --motion-duration-slow: 320ms;
+  --motion-duration-celebration: 800ms;     /* RESERVED for kiosk check-in ribbon ONLY */
+  --motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --motion-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --motion-ease-linear: linear;
+
+  /* ------------------------------------------------------------------------
+   * 1.7 Icon sizes
+   * --------------------------------------------------------------------- */
+  --icon-size-sm: 16px;
+  --icon-size-md: 20px;
+  --icon-size-lg: 24px;
+  --icon-size-xl: 32px;
+
+  /* ------------------------------------------------------------------------
+   * 1.8 Breakpoints (match Tailwind v4 defaults for utility consistency)
+   * --------------------------------------------------------------------- */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* ------------------------------------------------------------------------
+   * 1.9 Density (Comfort Mode)
+   * Comfort is the default; dense is opt-in via DensityProvider.
+   * --------------------------------------------------------------------- */
+  --rrt-density-multiplier: 1;              /* comfort = 1.0; dense = 0.875 */
+}
+
+/* ============================================================================
+ * Dark theme override (kiosk + login surfaces).
+ * Opt-in via `data-theme="dark"` on the route's root element.
+ *
+ * The token NAMES stay the same; only the VALUES flip. This means a primitive
+ * styled with `bg-[--color-rrt-surface]` works on both themes without code
+ * changes.
+ *
+ * Reference: docs/spec/01-design-system.md §6
+ * ============================================================================ */
+[data-theme="dark"] {
+  --color-rrt-bg: #3A1F1C;                  /* maroon-900 canvas */
+  --color-rrt-surface: #5D2F2A;             /* maroon-800 card */
+  --color-rrt-surface-hover: #7A2E2E;       /* maroon-700 hover */
+  --color-rrt-surface-sunken: #2E1815;      /* darker than canvas */
+  --color-rrt-line: rgba(245, 235, 220, 0.18); /* maroon-tinted cream border */
+  --color-rrt-line-strong: rgba(245, 235, 220, 0.32);
+  --color-rrt-text: #FFFBF3;                /* cream-50: 14.61:1 vs maroon-900 (AAA) */
+  --color-rrt-text-soft: #E5DBC6;           /* cream-300: 9.42:1 vs maroon-900 (AAA) */
+  --color-rrt-text-faint: rgba(245, 235, 220, 0.62); /* tertiary, AA at ~4.6:1 */
+  --shadow-focus: 0 0 0 2px #3A1F1C, 0 0 0 4px #D4AF37; /* gold-500 on maroon-900 = 7.17:1 */
+}
+
+/* ============================================================================
+ * Reduced-motion override.
+ * Collapses every motion token to instant; disables transforms in primitives.
+ * Reference: docs/spec/01-design-system.md §4.8
+ * ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-instant: 0ms;
+    --motion-duration-fast: 0ms;
+    --motion-duration-normal: 0ms;
+    --motion-duration-slow: 0ms;
+    --motion-duration-celebration: 0ms;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}

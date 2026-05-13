@@ -1,0 +1,60 @@
+/* ============================================================================
+ * @rrt-nextjs/design-system - reset.css
+ * ----------------------------------------------------------------------------
+ * Minimal supplement to Tailwind v4's `@import "tailwindcss"` preflight.
+ * Add ONLY rules that Tailwind preflight does not already cover and that the
+ * RRT design system needs at the base layer.
+ *
+ * Consumers OPTIONALLY import this AFTER tokens.css if they want the extra
+ * baseline rules:
+ *
+ *   @import "@rrt-nextjs/design-system/styles/reset.css";
+ * ============================================================================ */
+
+@layer base {
+  /* iOS Safari: prevent body horizontal scroll bounce */
+  html {
+    overflow-x: hidden;
+  }
+
+  /* Body: default to RRT canvas + sans-serif body */
+  body {
+    background-color: var(--color-rrt-bg);
+    color: var(--color-rrt-text);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Inputs: 16px floor on mobile to prevent iOS Safari auto-zoom */
+  @media (max-width: 768px) {
+    input,
+    select,
+    textarea {
+      font-size: 16px;
+    }
+  }
+
+  /* Display family on h1; sans-serif elsewhere - consumer can override per page */
+  h1 {
+    font-family: var(--font-display);
+  }
+  h2 {
+    font-family: var(--font-display);
+  }
+
+  /* Focus: hide default outline (we replace with --shadow-focus on primitives).
+   * NOTE: every focusable primitive in the design system MUST set its own
+   * `:focus-visible` ring via the `focus-ring` utility. Stripping outline here
+   * with no replacement is forbidden. */
+  :focus {
+    outline: none;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-rrt-maroon-700);
+    outline-offset: 2px;
+  }
+}

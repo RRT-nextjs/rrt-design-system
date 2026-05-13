@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Avatar - RRT design system QA</title>
+    <!-- Use tokens directly from the package's static CSS. -->
+    <link rel="stylesheet" href="../src/styles/tokens.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 32px;
+        background: var(--color-rrt-bg);
+        color: var(--color-rrt-text);
+        font-family: var(--font-sans);
+      }
+      h1 {
+        font-family: var(--font-display);
+        font-size: var(--text-h1);
+        margin: 0 0 8px;
+      }
+      h2 {
+        font-family: var(--font-display);
+        font-size: var(--text-h2);
+        margin: 32px 0 16px;
+      }
+      p.lede {
+        max-width: 640px;
+        color: var(--color-rrt-text-soft);
+        margin: 0 0 24px;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        align-items: center;
+        padding: 16px;
+        background: var(--color-rrt-surface);
+        border: 1px solid var(--color-rrt-line);
+        border-radius: var(--radius-xl);
+        margin-bottom: 16px;
+      }
+      .cell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        text-align: center;
+        font-size: var(--text-caption);
+        color: var(--color-rrt-text-soft);
+      }
+      .avatar {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        border-radius: 999px;
+        font-weight: 600;
+        user-select: none;
+      }
+      .avatar.square {
+        border-radius: var(--radius-xl);
+      }
+      .avatar img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: inherit;
+      }
+      .ring {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        box-shadow: inset 0 0 0 4px currentColor;
+        pointer-events: none;
+      }
+      .glyph {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: var(--color-rrt-cream-50);
+        border: 2px solid currentColor;
+        border-radius: 999px;
+        font-size: 12px;
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+      }
+      code {
+        font-family: var(--font-mono);
+        background: var(--color-rrt-surface-hover);
+        padding: 1px 6px;
+        border-radius: var(--radius-sm);
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Avatar - QA snapshot</h1>
+    <p class="lede">
+      Static HTML preview of the Avatar primitive states. Used as a visual
+      reference before wiring the React component into a consumer app. Token
+      values pulled from <code>../src/styles/tokens.css</code>.
+    </p>
+
+    <h2>Initials only - deterministic hash</h2>
+    <div class="row">
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 96px;
+            height: 96px;
+            background: var(--color-rrt-program-preschool-bg);
+            color: var(--color-rrt-program-preschool-text);
+            font-size: 32px;
+          "
+          >MA</span
+        >
+        <code>Mia Aaronson</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 96px;
+            height: 96px;
+            background: var(--color-rrt-program-beginners-bg);
+            color: var(--color-rrt-program-beginners-text);
+            font-size: 32px;
+          "
+          >LP</span
+        >
+        <code>Lily Park</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 96px;
+            height: 96px;
+            background: var(--color-rrt-program-competitive-bg);
+            color: var(--color-rrt-program-competitive-text);
+            font-size: 32px;
+          "
+          >SW</span
+        >
+        <code>Sam Wong</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 96px;
+            height: 96px;
+            background: var(--color-rrt-program-flexibility-bg);
+            color: var(--color-rrt-program-flexibility-text);
+            font-size: 32px;
+          "
+          >AG</span
+        >
+        <code>Anna García</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 96px;
+            height: 96px;
+            background: var(--color-rrt-program-ballet-bg);
+            color: var(--color-rrt-program-ballet-text);
+            font-size: 32px;
+          "
+          >OJ</span
+        >
+        <code>Owen Jones</code>
+      </div>
+    </div>
+
+    <h2>Sizes (28, 40, 56, 80, 96, 120, 160, 220)</h2>
+    <div class="row">
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 28px;
+            height: 28px;
+            background: var(--color-rrt-program-preschool-bg);
+            color: var(--color-rrt-program-preschool-text);
+            font-size: 12px;
+          "
+          >M</span
+        >
+        <code>28</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 40px;
+            height: 40px;
+            background: var(--color-rrt-program-beginners-bg);
+            color: var(--color-rrt-program-beginners-text);
+            font-size: 16px;
+          "
+          >MA</span
+        >
+        <code>40</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 56px;
+            height: 56px;
+            background: var(--color-rrt-program-competitive-bg);
+            color: var(--color-rrt-program-competitive-text);
+            font-size: 22px;
+          "
+          >MA</span
+        >
+        <code>56</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 80px;
+            height: 80px;
+            background: var(--color-rrt-program-flexibility-bg);
+            color: var(--color-rrt-program-flexibility-text);
+            font-size: 28px;
+          "
+          >MA</span
+        >
+        <code>80</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 96px;
+            height: 96px;
+            background: var(--color-rrt-program-ballet-bg);
+            color: var(--color-rrt-program-ballet-text);
+            font-size: 32px;
+          "
+          >MA</span
+        >
+        <code>96</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 120px;
+            height: 120px;
+            background: var(--color-rrt-program-preschool-bg);
+            color: var(--color-rrt-program-preschool-text);
+            font-size: 40px;
+          "
+          >MA</span
+        >
+        <code>120</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 160px;
+            height: 160px;
+            background: var(--color-rrt-program-beginners-bg);
+            color: var(--color-rrt-program-beginners-text);
+            font-size: 56px;
+          "
+          >MA</span
+        >
+        <code>160</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 220px;
+            height: 220px;
+            background: var(--color-rrt-program-ballet-bg);
+            color: var(--color-rrt-program-ballet-text);
+            font-size: 72px;
+          "
+          >MA</span
+        >
+        <code>220</code>
+      </div>
+    </div>
+
+    <h2>Status overlays (ring + glyph - WCAG 1.4.1)</h2>
+    <div class="row">
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 96px;
+            height: 96px;
+            background: var(--color-rrt-program-beginners-bg);
+            color: var(--color-rrt-program-beginners-text);
+            font-size: 32px;
+          "
+        >
+          MA
+          <span class="ring" style="color: var(--color-rrt-status-checkedin)">
+            <span class="glyph" style="color: var(--color-rrt-status-checkedin)">✓</span>
+          </span>
+        </span>
+        <code>checked-in</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 96px;
+            height: 96px;
+            background: var(--color-rrt-program-flexibility-bg);
+            color: var(--color-rrt-program-flexibility-text);
+            font-size: 32px;
+          "
+        >
+          MA
+          <span class="ring" style="color: var(--color-rrt-status-late)">
+            <span class="glyph" style="color: var(--color-rrt-status-late)">⌚</span>
+          </span>
+        </span>
+        <code>late</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 96px;
+            height: 96px;
+            background: var(--color-rrt-program-competitive-bg);
+            color: var(--color-rrt-program-competitive-text);
+            font-size: 32px;
+          "
+        >
+          MA
+          <span class="ring" style="color: var(--color-rrt-status-absent)">
+            <span class="glyph" style="color: var(--color-rrt-status-absent)">·</span>
+          </span>
+        </span>
+        <code>absent</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 96px;
+            height: 96px;
+            background: var(--color-rrt-program-preschool-bg);
+            color: var(--color-rrt-program-preschool-text);
+            font-size: 32px;
+          "
+        >
+          MA
+          <span class="ring" style="color: var(--color-rrt-status-pending)">
+            <span class="glyph" style="color: var(--color-rrt-status-pending)">·</span>
+          </span>
+        </span>
+        <code>pending</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 96px;
+            height: 96px;
+            background: var(--color-rrt-program-ballet-bg);
+            color: var(--color-rrt-program-ballet-text);
+            font-size: 32px;
+          "
+        >
+          MA
+          <span class="ring" style="color: var(--color-rrt-status-flag)">
+            <span class="glyph" style="color: var(--color-rrt-status-flag)">!</span>
+          </span>
+        </span>
+        <code>needs-attention</code>
+      </div>
+    </div>
+
+    <h2>Photo - simulated load, error, and COPPA consent denied</h2>
+    <div class="row">
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 96px;
+            height: 96px;
+            background: var(--color-rrt-program-beginners-bg);
+            color: var(--color-rrt-program-beginners-text);
+            font-size: 32px;
+          "
+        >
+          MA
+          <img
+            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop"
+            alt="Mia"
+            onerror="this.style.display='none'"
+          />
+        </span>
+        <code>photoConsent=true</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 96px;
+            height: 96px;
+            background: var(--color-rrt-program-flexibility-bg);
+            color: var(--color-rrt-program-flexibility-text);
+            font-size: 32px;
+          "
+        >
+          MA
+        </span>
+        <code>photoConsent=false (initials)</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar"
+          style="
+            width: 96px;
+            height: 96px;
+            background: var(--color-rrt-program-competitive-bg);
+            color: var(--color-rrt-program-competitive-text);
+            font-size: 32px;
+          "
+        >
+          MA
+          <img src="https://example.invalid/missing.jpg" alt="Mia" onerror="this.style.display='none'" />
+        </span>
+        <code>photo error -> initials fallback</code>
+      </div>
+      <div class="cell">
+        <span
+          class="avatar square"
+          style="
+            width: 96px;
+            height: 96px;
+            background: var(--color-rrt-program-ballet-bg);
+            color: var(--color-rrt-program-ballet-text);
+            font-size: 32px;
+          "
+        >
+          MA
+        </span>
+        <code>shape=square</code>
+      </div>
+    </div>
+
+    <h2>Dark theme (kiosk + login)</h2>
+    <div
+      class="row"
+      data-theme="dark"
+      style="background: var(--color-rrt-maroon-900); border-color: rgba(245, 235, 220, 0.18)"
+    >
+      <div class="cell" style="color: var(--color-rrt-cream-300)">
+        <span
+          class="avatar"
+          style="
+            width: 96px;
+            height: 96px;
+            background: var(--color-rrt-program-ballet-bg);
+            color: var(--color-rrt-program-ballet-text);
+            font-size: 32px;
+          "
+          >MA</span
+        >
+        <code>dark theme</code>
+      </div>
+      <div class="cell" style="color: var(--color-rrt-cream-300)">
+        <span
+          class="avatar"
+          style="
+            width: 220px;
+            height: 220px;
+            background: var(--color-rrt-program-beginners-bg);
+            color: var(--color-rrt-program-beginners-text);
+            font-size: 72px;
+          "
+          >MA</span
+        >
+        <code>kiosk tile (220pt)</code>
+      </div>
+    </div>
+  </body>
+</html>

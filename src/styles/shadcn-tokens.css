@@ -1,0 +1,80 @@
+/* ============================================================================
+ * @rrt-nextjs/design-system - shadcn-tokens.css
+ * ----------------------------------------------------------------------------
+ * Maps shadcn/ui's semantic CSS variables to RRT brand tokens. Imported once
+ * per consumer app's globals.css AFTER tokens.css:
+ *
+ *   @import "@rrt-nextjs/design-system/styles/tokens.css";
+ *   @import "@rrt-nextjs/design-system/styles/shadcn-tokens.css";
+ *
+ * shadcn primitives use CSS variables internally (--background, --primary,
+ * --ring, etc). This file remaps each to an RRT token so the scaffolded
+ * primitives in src/components/ui adopt the brand without code changes.
+ *
+ * Reference: docs/spec/01-design-system.md §2.2
+ * ============================================================================ */
+
+@layer base {
+  :root {
+    /* Page canvas */
+    --background: var(--color-rrt-bg);
+    --foreground: var(--color-rrt-text);
+
+    /* Card / popover */
+    --card: var(--color-rrt-surface);
+    --card-foreground: var(--color-rrt-text);
+    --popover: var(--color-rrt-surface);
+    --popover-foreground: var(--color-rrt-text);
+
+    /* Primary brand */
+    --primary: var(--color-rrt-maroon-800);
+    --primary-foreground: var(--color-rrt-cream-50);
+
+    /* Secondary */
+    --secondary: var(--color-rrt-maroon-50);
+    --secondary-foreground: var(--color-rrt-maroon-700);
+
+    /* Muted */
+    --muted: var(--color-rrt-surface-hover);
+    --muted-foreground: var(--color-rrt-text-soft);
+
+    /* Accent (gold-700 - the only gold cleared on cream) */
+    --accent: var(--color-rrt-gold-700);
+    --accent-foreground: var(--color-rrt-cream-50);
+
+    /* Destructive */
+    --destructive: var(--color-rrt-error);
+    --destructive-foreground: var(--color-rrt-cream-50);
+
+    /* Border / input / focus ring */
+    --border: var(--color-rrt-line);
+    --input: var(--color-rrt-line);
+    --ring: var(--color-rrt-maroon-700);
+
+    /* Radius (default) */
+    --radius: var(--radius-lg);
+  }
+
+  [data-theme="dark"] {
+    /* Dark theme remaps */
+    --background: var(--color-rrt-maroon-900);
+    --foreground: var(--color-rrt-cream-50);
+    --card: var(--color-rrt-maroon-800);
+    --card-foreground: var(--color-rrt-cream-50);
+    --popover: var(--color-rrt-maroon-800);
+    --popover-foreground: var(--color-rrt-cream-50);
+    --primary: var(--color-rrt-gold-500);
+    --primary-foreground: var(--color-rrt-maroon-900);
+    --secondary: var(--color-rrt-maroon-700);
+    --secondary-foreground: var(--color-rrt-cream-50);
+    --muted: var(--color-rrt-maroon-700);
+    --muted-foreground: var(--color-rrt-cream-300);
+    --accent: var(--color-rrt-gold-500);
+    --accent-foreground: var(--color-rrt-maroon-900);
+    --destructive: var(--color-rrt-error);
+    --destructive-foreground: var(--color-rrt-cream-50);
+    --border: rgba(245, 235, 220, 0.18);
+    --input: rgba(245, 235, 220, 0.18);
+    --ring: var(--color-rrt-gold-500);
+  }
+}
