@@ -93,7 +93,7 @@ const sizeConfig: Record<
     avatarSize: 220,
     primaryClass: 'text-[var(--text-h3)] font-display',
     secondaryClass: 'text-[var(--text-body)]',
-    tileHeight: 320,
+    tileHeight: 280,
     padding: 'p-4',
   },
 };

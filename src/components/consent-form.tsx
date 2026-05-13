@@ -124,7 +124,7 @@ export function ConsentForm({
         </p>
       </header>
 
-      <div className="prose prose-sm max-w-none text-[var(--color-rrt-text)]">
+      <div className="max-w-none space-y-4 text-[var(--text-body)] leading-relaxed text-[var(--color-rrt-text)]">
         <p>
           Rhythmic Ribbon of Texas is required by the Children&apos;s Online Privacy
           Protection Act (COPPA) to obtain verifiable consent from a parent or
