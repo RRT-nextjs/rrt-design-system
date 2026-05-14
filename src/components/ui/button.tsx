@@ -54,10 +54,15 @@ const buttonVariants = cva(
         ],
       },
       size: {
-        sm: 'h-8 px-3 text-[var(--text-body-sm)]',
-        md: 'h-10 px-4 text-[var(--text-body-sm)]',
-        lg: 'h-12 px-5 text-[var(--text-body)]',
-        xl: 'h-14 px-6 text-[var(--text-body)]',
+        // `[font-size:var(...)]` instead of `text-[var(...)]` because the
+        // bracket-arbitrary form is ambiguous to tailwind-merge (size vs
+        // color) and collides with the variant's text-color class - the
+        // color gets dropped, leaving primary buttons with inherited body
+        // text on dark maroon background.
+        sm: 'h-8 px-3 [font-size:var(--text-body-sm)]',
+        md: 'h-10 px-4 [font-size:var(--text-body-sm)]',
+        lg: 'h-12 px-5 [font-size:var(--text-body)]',
+        xl: 'h-14 px-6 [font-size:var(--text-body)]',
       },
       fullWidth: {
         true: 'w-full',
