@@ -54,11 +54,18 @@ const buttonVariants = cva(
         ],
       },
       size: {
-        // `[font-size:var(...)]` instead of `text-[var(...)]` because the
-        // bracket-arbitrary form is ambiguous to tailwind-merge (size vs
-        // color) and collides with the variant's text-color class - the
-        // color gets dropped, leaving primary buttons with inherited body
-        // text on dark maroon background.
+        // Use the property-arbitrary form for font-size below (the
+        // [property:value] shape, e.g. h-8 px-3 followed by a font-size
+        // arbitrary value) instead of the text-color-style form. The
+        // shorter form is ambiguous to tailwind-merge (size vs color) and
+        // collides with the variant's text-color class - the color gets
+        // dropped, leaving primary buttons with inherited body text on
+        // a dark maroon background. Note: this comment used to embed
+        // those two forms inline as code-formatted strings, but Tailwind
+        // v4's class extractor picked the ellipsis-placeholder versions
+        // up as candidate classes, producing invalid `var(...)` rules
+        // that `next dev` (Turbopack PostCSS) hard-fails on; the literal
+        // tokens are removed so the comment is no longer extractor bait.
         sm: 'h-8 px-3 [font-size:var(--text-body-sm)]',
         md: 'h-10 px-4 [font-size:var(--text-body-sm)]',
         lg: 'h-12 px-5 [font-size:var(--text-body)]',
