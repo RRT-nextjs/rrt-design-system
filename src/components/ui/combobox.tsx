@@ -52,6 +52,14 @@ export interface ComboboxProps {
   invalid?: boolean;
   disabled?: boolean;
   size?: 'md' | 'lg' | 'xl';
+  /** Forwarded onto the trigger so a wrapping FormField can link its label
+   * (htmlFor), error/description (aria-describedby), and required/invalid state.
+   * Without these the FormField label points at nothing. */
+  id?: string;
+  'aria-labelledby'?: string;
+  'aria-describedby'?: string;
+  'aria-required'?: boolean;
+  'aria-invalid'?: boolean;
 }
 
 const triggerSizeClass: Record<'md' | 'lg' | 'xl', string> = {
@@ -71,6 +79,11 @@ export function Combobox({
   invalid,
   disabled,
   size = 'lg',
+  id,
+  'aria-labelledby': ariaLabelledBy,
+  'aria-describedby': ariaDescribedBy,
+  'aria-required': ariaRequired,
+  'aria-invalid': ariaInvalid,
 }: ComboboxProps) {
   const [open, setOpen] = React.useState(false);
   const selected = value
@@ -82,9 +95,14 @@ export function Combobox({
       <PopoverPrimitive.Trigger asChild>
         <button
           type="button"
+          id={id}
           role="combobox"
+          aria-haspopup="listbox"
           aria-expanded={open}
-          aria-invalid={invalid || undefined}
+          aria-labelledby={ariaLabelledBy}
+          aria-describedby={ariaDescribedBy}
+          aria-required={ariaRequired}
+          aria-invalid={invalid || ariaInvalid || undefined}
           disabled={disabled}
           className={cn(
             'inline-flex w-full items-center justify-between gap-2',
