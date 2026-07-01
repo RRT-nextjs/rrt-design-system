@@ -113,6 +113,14 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       iconPosition = 'leading',
       children,
       type = 'button',
+      // Destructured OUT of props so the `{...props}` spread below can never
+      // overwrite the guarded handler. Previously onClick stayed inside props
+      // and the spread (declared after the guard) silently replaced it - a
+      // Button with `disabled` + `onClick` still fired on activation. Mouse
+      // clicks were masked by aria-disabled:pointer-events-none, but the
+      // button stays FOCUSABLE by design, so keyboard Enter/Space reached the
+      // un-guarded handler.
+      onClick,
       ...props
     },
     ref,
@@ -148,15 +156,16 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         aria-live={loading && loadingText ? 'polite' : undefined}
         // We use aria-disabled (not the HTML disabled attr) so screen readers
         // can still focus and read why the button is unavailable. See §3.1
-        // and §4.4 in the design system spec.
+        // and §4.4 in the design system spec. The spread comes FIRST so no
+        // props key can override the guard; onClick is destructured out above.
+        {...props}
         onClick={(e) => {
           if (isInactive) {
             e.preventDefault();
             return;
           }
-          props.onClick?.(e);
+          onClick?.(e);
         }}
-        {...props}
       >
         {content}
       </Comp>
