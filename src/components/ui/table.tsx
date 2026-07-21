@@ -35,14 +35,14 @@ export const Table = React.forwardRef<
       ref={ref}
       className={cn(
         'w-full caption-bottom',
-        'text-[var(--text-body-sm)]',
+        '[font-size:var(--text-body-sm)]',
         'border-collapse',
         className,
       )}
       {...props}
     >
       {caption ? (
-        <caption className="mt-4 text-[var(--text-body-sm)] text-[var(--color-rrt-text-soft)]">
+        <caption className="mt-4 [font-size:var(--text-body-sm)] text-[var(--color-rrt-text-soft)]">
           {caption}
         </caption>
       ) : null}
@@ -156,7 +156,7 @@ export const TableHead = React.forwardRef<HTMLTableCellElement, TableHeadProps>(
         aria-sort={ariaSort}
         className={cn(
           'h-12 px-4 text-left align-middle',
-          'text-[var(--text-body-sm)] font-semibold',
+          '[font-size:var(--text-body-sm)] font-semibold',
           'text-[var(--color-rrt-text-soft)]',
           className,
         )}

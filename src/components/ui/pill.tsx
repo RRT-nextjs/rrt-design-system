@@ -31,8 +31,8 @@ const pillVariants = cva(
         maroon: '',
       },
       size: {
-        sm: 'h-9 px-3 text-[var(--text-body-sm)]',
-        md: 'h-11 px-4 text-[var(--text-body-sm)]',
+        sm: 'h-9 px-3 [font-size:var(--text-body-sm)]',
+        md: 'h-11 px-4 [font-size:var(--text-body-sm)]',
       },
       selected: {
         true: '',

@@ -65,7 +65,7 @@ export const Wordmark = React.forwardRef<HTMLSpanElement, WordmarkProps>(
           aria-hidden="true"
           className={cn(
             'font-display font-medium',
-            variant === 'stacked' ? 'text-[var(--text-h3)]' : 'text-[var(--text-h4)]',
+            variant === 'stacked' ? '[font-size:var(--text-h3)]' : '[font-size:var(--text-h4)]',
           )}
         >
           Rhythmic Ribbon of Texas

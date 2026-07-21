@@ -34,9 +34,9 @@ const inputVariants = cva(
   {
     variants: {
       size: {
-        md: 'h-10 px-3 text-[var(--text-body-sm)]',
-        lg: 'h-12 px-4 text-[var(--text-body)]',
-        xl: 'h-14 px-5 text-[var(--text-body)]',
+        md: 'h-10 px-3 [font-size:var(--text-body-sm)]',
+        lg: 'h-12 px-4 [font-size:var(--text-body)]',
+        xl: 'h-14 px-5 [font-size:var(--text-body)]',
       },
     },
     defaultVariants: {

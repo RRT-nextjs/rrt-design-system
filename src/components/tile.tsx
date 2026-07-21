@@ -77,22 +77,22 @@ const sizeConfig: Record<
 > = {
   compact: {
     avatarSize: 80,
-    primaryClass: 'text-[var(--text-body-sm)]',
-    secondaryClass: 'text-[var(--text-caption)]',
+    primaryClass: '[font-size:var(--text-body-sm)]',
+    secondaryClass: '[font-size:var(--text-caption)]',
     tileHeight: 144,
     padding: 'p-2',
   },
   comfortable: {
     avatarSize: 96,
-    primaryClass: 'text-[var(--text-body)]',
-    secondaryClass: 'text-[var(--text-body-sm)]',
+    primaryClass: '[font-size:var(--text-body)]',
+    secondaryClass: '[font-size:var(--text-body-sm)]',
     tileHeight: 176,
     padding: 'p-3',
   },
   kiosk: {
     avatarSize: 220,
-    primaryClass: 'text-[var(--text-h3)] font-display',
-    secondaryClass: 'text-[var(--text-body)]',
+    primaryClass: '[font-size:var(--text-h3)] font-display',
+    secondaryClass: '[font-size:var(--text-body)]',
     tileHeight: 280,
     padding: 'p-4',
   },

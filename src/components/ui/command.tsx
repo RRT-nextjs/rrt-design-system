@@ -83,7 +83,7 @@ export function CommandDialog({
         <DialogDescription className="sr-only">{description}</DialogDescription>
         <Command
           shouldFilter={true}
-          className="[&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:py-2 [&_[cmdk-group-heading]]:text-[var(--text-caption)] [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wider [&_[cmdk-group-heading]]:text-[var(--color-rrt-text-soft)]"
+          className="[&_[cmdk-group-heading]]:px-3 [&_[cmdk-group-heading]]:py-2 [&_[cmdk-group-heading]]:[font-size:var(--text-caption)] [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wider [&_[cmdk-group-heading]]:text-[var(--color-rrt-text-soft)]"
         >
           {children}
         </Command>
@@ -108,7 +108,7 @@ export const CommandInput = React.forwardRef<
       ref={ref}
       className={cn(
         'flex h-12 w-full bg-transparent py-3',
-        'text-[var(--text-body)] text-[var(--color-rrt-text)]',
+        '[font-size:var(--text-body)] text-[var(--color-rrt-text)]',
         'outline-none placeholder:text-[var(--color-rrt-text-faint)]',
         'disabled:cursor-not-allowed disabled:opacity-55',
         className,
@@ -137,7 +137,7 @@ export const CommandEmpty = React.forwardRef<
 >((props, ref) => (
   <CommandPrimitive.Empty
     ref={ref}
-    className="py-6 text-center text-[var(--text-body-sm)] text-[var(--color-rrt-text-soft)]"
+    className="py-6 text-center [font-size:var(--text-body-sm)] text-[var(--color-rrt-text-soft)]"
     {...props}
   />
 ));
@@ -179,7 +179,7 @@ export const CommandItem = React.forwardRef<
     className={cn(
       'relative flex cursor-default select-none items-center gap-2',
       'rounded-[var(--radius-md)] px-2 py-2',
-      'text-[var(--text-body-sm)] outline-none',
+      '[font-size:var(--text-body-sm)] outline-none',
       'aria-selected:bg-[var(--color-rrt-surface-hover)]',
       'data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-55',
       className,
@@ -196,7 +196,7 @@ export function CommandShortcut({
   return (
     <span
       className={cn(
-        'ml-auto text-[var(--text-caption)] tracking-wider',
+        'ml-auto [font-size:var(--text-caption)] tracking-wider',
         'text-[var(--color-rrt-text-faint)]',
         className,
       )}

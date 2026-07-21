@@ -99,7 +99,7 @@ export function Pagination({
             className={cn(
               'inline-flex items-center justify-center',
               'h-10 min-w-10 px-2 rounded-[var(--radius-md)]',
-              'text-[var(--text-body-sm)] font-semibold',
+              '[font-size:var(--text-body-sm)] font-semibold',
               'focus-visible:outline-none focus-visible:shadow-[var(--shadow-focus)]',
               item === page
                 ? 'bg-[var(--color-rrt-maroon-700)] text-[var(--color-rrt-cream-50)]'

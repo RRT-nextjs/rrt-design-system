@@ -146,7 +146,7 @@ export const ToastAction = React.forwardRef<
     className={cn(
       'inline-flex h-9 shrink-0 items-center justify-center',
       'rounded-[var(--radius-md)] border border-current',
-      'bg-transparent px-3 text-[var(--text-body-sm)] font-semibold',
+      'bg-transparent px-3 [font-size:var(--text-body-sm)] font-semibold',
       'hover:opacity-90',
       'focus-visible:outline-none focus-visible:shadow-[var(--shadow-focus)]',
       className,
@@ -183,7 +183,7 @@ export const ToastTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Title
     ref={ref}
-    className={cn('text-[var(--text-body-sm)] font-semibold', className)}
+    className={cn('[font-size:var(--text-body-sm)] font-semibold', className)}
     {...props}
   />
 ));
@@ -195,7 +195,7 @@ export const ToastDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Description
     ref={ref}
-    className={cn('text-[var(--text-body-sm)] opacity-90', className)}
+    className={cn('[font-size:var(--text-body-sm)] opacity-90', className)}
     {...props}
   />
 ));

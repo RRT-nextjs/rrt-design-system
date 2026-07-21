@@ -26,9 +26,9 @@ export const SelectValue = SelectPrimitive.Value;
 type TriggerSize = 'md' | 'lg' | 'xl';
 
 const triggerSizeClass: Record<TriggerSize, string> = {
-  md: 'h-10 px-3 text-[var(--text-body-sm)]',
-  lg: 'h-12 px-4 text-[var(--text-body)]',
-  xl: 'h-14 px-5 text-[var(--text-body)]',
+  md: 'h-10 px-3 [font-size:var(--text-body-sm)]',
+  lg: 'h-12 px-4 [font-size:var(--text-body)]',
+  xl: 'h-14 px-5 [font-size:var(--text-body)]',
 };
 
 export const SelectTrigger = React.forwardRef<
@@ -149,7 +149,7 @@ export const SelectLabel = React.forwardRef<
   <SelectPrimitive.Label
     ref={ref}
     className={cn(
-      'px-2 py-1.5 text-[var(--text-caption)] font-semibold text-[var(--color-rrt-text-soft)] uppercase tracking-wider',
+      'px-2 py-1.5 [font-size:var(--text-caption)] font-semibold text-[var(--color-rrt-text-soft)] uppercase tracking-wider',
       className,
     )}
     {...props}
@@ -166,7 +166,7 @@ export const SelectItem = React.forwardRef<
     className={cn(
       'relative flex w-full cursor-default select-none items-center',
       'rounded-[var(--radius-md)]',
-      'py-2 pl-8 pr-2 text-[var(--text-body-sm)]',
+      'py-2 pl-8 pr-2 [font-size:var(--text-body-sm)]',
       'outline-none',
       'focus:bg-[var(--color-rrt-surface-hover)]',
       'data-[disabled]:pointer-events-none data-[disabled]:opacity-55',

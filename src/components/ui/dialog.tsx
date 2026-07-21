@@ -143,7 +143,7 @@ export const DialogTitle = React.forwardRef<
   <DialogPrimitive.Title
     ref={ref}
     className={cn(
-      'font-display text-[var(--text-h2)] leading-[var(--text-h2--line-height)] tracking-[var(--text-h2--letter-spacing)]',
+      'font-display [font-size:var(--text-h2)] leading-[var(--text-h2--line-height)] tracking-[var(--text-h2--letter-spacing)]',
       'text-[var(--color-rrt-text)]',
       className,
     )}
@@ -159,7 +159,7 @@ export const DialogDescription = React.forwardRef<
   <DialogPrimitive.Description
     ref={ref}
     className={cn(
-      'text-[var(--text-body-sm)] text-[var(--color-rrt-text-soft)]',
+      '[font-size:var(--text-body-sm)] text-[var(--color-rrt-text-soft)]',
       className,
     )}
     {...props}

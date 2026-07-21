@@ -2,7 +2,9 @@
  * @rrt-nextjs/design-system
  *
  * The single source of truth for RRT brand: tokens, primitives, and
- * compositions. Consumed by rrt-app and rrt-nextjs.
+ * compositions. Consumed by the operations apps rrt-studio and rrt-app via
+ * pinned GitHub commit references; the rrt-nextjs marketing site does not
+ * consume this package.
  *
  * Reference: docs/spec/01-design-system.md
  */

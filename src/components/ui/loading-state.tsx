@@ -95,7 +95,7 @@ export function LoadingState({
         <RibbonArc size={24} />
       </span>
       {label ? (
-        <span className="text-[var(--text-body-sm)] text-[var(--color-rrt-text-soft)]">
+        <span className="[font-size:var(--text-body-sm)] text-[var(--color-rrt-text-soft)]">
           {label}
         </span>
       ) : (

@@ -75,7 +75,7 @@ export const Switch = React.forwardRef<
         {label ? (
           <label
             htmlFor={id}
-            className="text-[var(--text-body-sm)] font-semibold text-[var(--color-rrt-text)] cursor-pointer"
+            className="[font-size:var(--text-body-sm)] font-semibold text-[var(--color-rrt-text)] cursor-pointer"
           >
             {label}
           </label>
@@ -83,7 +83,7 @@ export const Switch = React.forwardRef<
         {description ? (
           <p
             id={descriptionId}
-            className="text-[var(--text-caption)] text-[var(--color-rrt-text-soft)]"
+            className="[font-size:var(--text-caption)] text-[var(--color-rrt-text-soft)]"
           >
             {description}
           </p>

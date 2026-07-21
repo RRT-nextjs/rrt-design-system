@@ -29,7 +29,7 @@ const bannerVariants = cva(
   [
     'flex items-start gap-3 w-full',
     'rounded-[var(--radius-lg)] border p-4',
-    'text-[var(--text-body-sm)]',
+    '[font-size:var(--text-body-sm)]',
   ],
   {
     variants: {
@@ -118,7 +118,7 @@ export const Banner = React.forwardRef<HTMLDivElement, BannerProps>(
                 'mt-2 inline-flex items-center justify-center',
                 'h-9 px-3 rounded-[var(--radius-md)]',
                 'border border-current bg-transparent',
-                'text-[var(--text-body-sm)] font-semibold',
+                '[font-size:var(--text-body-sm)] font-semibold',
                 'hover:opacity-90',
                 'focus-visible:outline-none focus-visible:shadow-[var(--shadow-focus)]',
               )}
