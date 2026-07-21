@@ -116,7 +116,7 @@ export function PhotoUploader({
 
   return (
     <div className={cn('flex flex-col gap-3', className)}>
-      <p className="text-[var(--text-body-sm)] text-[var(--color-rrt-text-soft)]">
+      <p className="[font-size:var(--text-body-sm)] text-[var(--color-rrt-text-soft)]">
         Upload a clear face photo. We use it on the kiosk and on coach rosters.
         We never share it externally.
       </p>
@@ -166,7 +166,7 @@ export function PhotoUploader({
               alt="Photo preview"
               className="size-32 rounded-[var(--radius-xl)] object-cover"
             />
-            <p className="text-[var(--text-body-sm)] text-[var(--color-rrt-text-soft)]">
+            <p className="[font-size:var(--text-body-sm)] text-[var(--color-rrt-text-soft)]">
               Click or drag a different photo to replace.
             </p>
           </>
@@ -176,16 +176,16 @@ export function PhotoUploader({
               aria-hidden="true"
               className="size-8 text-[var(--color-rrt-maroon-700)]"
             />
-            <p className="text-[var(--text-body)] font-semibold text-[var(--color-rrt-text)]">
+            <p className="[font-size:var(--text-body)] font-semibold text-[var(--color-rrt-text)]">
               Drag a photo here or click to choose.
             </p>
-            <p className="text-[var(--text-body-sm)] text-[var(--color-rrt-text-soft)]">
+            <p className="[font-size:var(--text-body-sm)] text-[var(--color-rrt-text-soft)]">
               {formatLabel}
             </p>
           </>
         )}
         {isUploading ? (
-          <p className="text-[var(--text-body-sm)] text-[var(--color-rrt-info)]">
+          <p className="[font-size:var(--text-body-sm)] text-[var(--color-rrt-info)]">
             Uploading...
           </p>
         ) : null}
@@ -194,7 +194,7 @@ export function PhotoUploader({
       {errorMessage ? (
         <p
           role="alert"
-          className="inline-flex items-center gap-1.5 text-[var(--text-body-sm)] text-[var(--color-rrt-error)]"
+          className="inline-flex items-center gap-1.5 [font-size:var(--text-body-sm)] text-[var(--color-rrt-error)]"
         >
           <X aria-hidden="true" className="size-4" />
           {errorMessage}

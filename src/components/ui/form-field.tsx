@@ -72,7 +72,7 @@ export const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
         <LabelPrimitive.Root
           htmlFor={id}
           className={cn(
-            'text-[var(--text-body-sm)] font-semibold',
+            '[font-size:var(--text-body-sm)] font-semibold',
             'text-[var(--color-rrt-text-soft)]',
             hideLabel && 'sr-only',
           )}
@@ -94,7 +94,7 @@ export const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
             role="alert"
             className={cn(
               'inline-flex items-center gap-1.5',
-              'text-[var(--text-body-sm)] text-[var(--color-rrt-error)]',
+              '[font-size:var(--text-body-sm)] text-[var(--color-rrt-error)]',
             )}
           >
             <AlertCircle aria-hidden="true" className="size-4 shrink-0" />
@@ -103,7 +103,7 @@ export const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
         ) : description ? (
           <p
             id={descriptionId}
-            className="text-[var(--text-caption)] text-[var(--color-rrt-text-faint)]"
+            className="[font-size:var(--text-caption)] text-[var(--color-rrt-text-faint)]"
           >
             {description}
           </p>

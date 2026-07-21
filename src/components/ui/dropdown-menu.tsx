@@ -40,7 +40,7 @@ export const DropdownMenuSubTrigger = React.forwardRef<
     className={cn(
       'flex cursor-default select-none items-center gap-2',
       'rounded-[var(--radius-md)] px-2 py-1.5',
-      'text-[var(--text-body-sm)] outline-none',
+      '[font-size:var(--text-body-sm)] outline-none',
       'focus:bg-[var(--color-rrt-surface-hover)]',
       'data-[state=open]:bg-[var(--color-rrt-surface-hover)]',
       inset && 'pl-8',
@@ -112,7 +112,7 @@ export const DropdownMenuItem = React.forwardRef<
     className={cn(
       'relative flex cursor-default select-none items-center gap-2',
       'rounded-[var(--radius-md)] px-2 py-1.5',
-      'text-[var(--text-body-sm)] outline-none',
+      '[font-size:var(--text-body-sm)] outline-none',
       'transition-colors',
       'focus:bg-[var(--color-rrt-surface-hover)]',
       'data-[disabled]:pointer-events-none data-[disabled]:opacity-55',
@@ -135,7 +135,7 @@ export const DropdownMenuCheckboxItem = React.forwardRef<
     className={cn(
       'relative flex cursor-default select-none items-center',
       'rounded-[var(--radius-md)] py-1.5 pl-8 pr-2',
-      'text-[var(--text-body-sm)] outline-none',
+      '[font-size:var(--text-body-sm)] outline-none',
       'focus:bg-[var(--color-rrt-surface-hover)]',
       className,
     )}
@@ -160,7 +160,7 @@ export const DropdownMenuRadioItem = React.forwardRef<
     className={cn(
       'relative flex cursor-default select-none items-center',
       'rounded-[var(--radius-md)] py-1.5 pl-8 pr-2',
-      'text-[var(--text-body-sm)] outline-none',
+      '[font-size:var(--text-body-sm)] outline-none',
       'focus:bg-[var(--color-rrt-surface-hover)]',
       className,
     )}
@@ -185,7 +185,7 @@ export const DropdownMenuLabel = React.forwardRef<
   <DropdownMenuPrimitive.Label
     ref={ref}
     className={cn(
-      'px-2 py-1.5 text-[var(--text-caption)] font-semibold uppercase tracking-wider text-[var(--color-rrt-text-soft)]',
+      'px-2 py-1.5 [font-size:var(--text-caption)] font-semibold uppercase tracking-wider text-[var(--color-rrt-text-soft)]',
       inset && 'pl-8',
       className,
     )}
@@ -213,7 +213,7 @@ export function DropdownMenuShortcut({
   return (
     <span
       className={cn(
-        'ml-auto text-[var(--text-caption)] tracking-wider opacity-60',
+        'ml-auto [font-size:var(--text-caption)] tracking-wider opacity-60',
         className,
       )}
       {...props}

@@ -115,16 +115,16 @@ export function ConsentForm({
       aria-label="Parental consent form"
     >
       <header className="flex flex-col gap-2">
-        <h2 className="font-display text-[var(--text-h2)] text-[var(--color-rrt-text)]">
+        <h2 className="font-display [font-size:var(--text-h2)] text-[var(--color-rrt-text)]">
           Parental consent
         </h2>
-        <p className="text-[var(--text-body)] text-[var(--color-rrt-text-soft)]">
+        <p className="[font-size:var(--text-body)] text-[var(--color-rrt-text-soft)]">
           Federal law requires us to ask for your consent before we collect or
           store certain information about your child. Please read carefully.
         </p>
       </header>
 
-      <div className="max-w-none space-y-4 text-[var(--text-body)] leading-relaxed text-[var(--color-rrt-text)]">
+      <div className="max-w-none space-y-4 [font-size:var(--text-body)] leading-relaxed text-[var(--color-rrt-text)]">
         <p>
           Rhythmic Ribbon of Texas is required by the Children&apos;s Online Privacy
           Protection Act (COPPA) to obtain verifiable consent from a parent or
@@ -205,7 +205,7 @@ export function ConsentForm({
             }
             required
           />
-          <span className="text-[var(--text-body-sm)] text-[var(--color-rrt-text)]">
+          <span className="[font-size:var(--text-body-sm)] text-[var(--color-rrt-text)]">
             I am the legal parent or legal guardian of {childName} and I am at
             least 18 years of age.
             <span aria-hidden="true" className="ml-1 text-[var(--color-rrt-error)]">*</span>
@@ -218,7 +218,7 @@ export function ConsentForm({
             onCheckedChange={(v) => setIdentityConsent(v === true)}
             required
           />
-          <span className="text-[var(--text-body-sm)] text-[var(--color-rrt-text)]">
+          <span className="[font-size:var(--text-body-sm)] text-[var(--color-rrt-text)]">
             I consent to RRT collecting and storing my child&apos;s name, age, date
             of birth, and attendance records as described above.
             <span aria-hidden="true" className="ml-1 text-[var(--color-rrt-error)]">*</span>
@@ -230,7 +230,7 @@ export function ConsentForm({
             checked={photoConsent}
             onCheckedChange={(v) => setPhotoConsent(v === true)}
           />
-          <span className="text-[var(--text-body-sm)] text-[var(--color-rrt-text)]">
+          <span className="[font-size:var(--text-body-sm)] text-[var(--color-rrt-text)]">
             I consent to RRT taking and storing photos of my child to be used
             for class identification at the kiosk and on coach rosters only. I
             understand that these photos will not be shared publicly, posted on
@@ -246,7 +246,7 @@ export function ConsentForm({
               setCommunicationsConsent(v === true)
             }
           />
-          <span className="text-[var(--text-body-sm)] text-[var(--color-rrt-text)]">
+          <span className="[font-size:var(--text-body-sm)] text-[var(--color-rrt-text)]">
             I consent to RRT contacting me by email and SMS with class updates,
             makeup options, and important notices. I understand I can opt out
             at any time by replying STOP to any SMS or clicking unsubscribe in
@@ -285,7 +285,7 @@ export function ConsentForm({
               'h-12 px-5 rounded-[var(--radius-lg)]',
               'bg-transparent text-[var(--color-rrt-maroon-700)]',
               'border border-[var(--color-rrt-line)]',
-              'text-[var(--text-body)] font-semibold',
+              '[font-size:var(--text-body)] font-semibold',
               'hover:bg-[var(--color-rrt-surface-hover)]',
               'focus-visible:outline-none focus-visible:shadow-[var(--shadow-focus)]',
             )}
@@ -300,7 +300,7 @@ export function ConsentForm({
             'inline-flex items-center justify-center',
             'h-12 px-5 rounded-[var(--radius-lg)]',
             'bg-[var(--color-rrt-maroon-800)] text-[var(--color-rrt-cream-50)]',
-            'text-[var(--text-body)] font-semibold',
+            '[font-size:var(--text-body)] font-semibold',
             'hover:bg-[var(--color-rrt-maroon-700)]',
             'focus-visible:outline-none focus-visible:shadow-[var(--shadow-focus)]',
             'disabled:opacity-55 disabled:cursor-not-allowed',

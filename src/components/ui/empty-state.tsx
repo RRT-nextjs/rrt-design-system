@@ -87,11 +87,11 @@ export function EmptyState({
     >
       <IllustrationFor kind={illustration} />
       <div className="flex flex-col gap-2 max-w-prose">
-        <h3 className="font-display text-[var(--text-h3)] text-[var(--color-rrt-text)]">
+        <h3 className="font-display [font-size:var(--text-h3)] text-[var(--color-rrt-text)]">
           {title}
         </h3>
         {description ? (
-          <p className="text-[var(--text-body)] text-[var(--color-rrt-text-soft)]">
+          <p className="[font-size:var(--text-body)] text-[var(--color-rrt-text-soft)]">
             {description}
           </p>
         ) : null}
@@ -104,7 +104,7 @@ export function EmptyState({
             'inline-flex items-center justify-center',
             'h-12 px-5 rounded-[var(--radius-lg)]',
             'bg-[var(--color-rrt-maroon-800)] text-[var(--color-rrt-cream-50)]',
-            'text-[var(--text-body)] font-semibold',
+            '[font-size:var(--text-body)] font-semibold',
             'hover:bg-[var(--color-rrt-maroon-700)]',
             'focus-visible:outline-none focus-visible:shadow-[var(--shadow-focus)]',
           )}

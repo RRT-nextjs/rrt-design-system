@@ -33,8 +33,8 @@ const chipVariants = cva(
   {
     variants: {
       size: {
-        sm: 'h-5 px-2 text-[var(--text-caption)]',
-        md: 'h-7 px-2.5 text-[var(--text-body-sm)]',
+        sm: 'h-5 px-2 [font-size:var(--text-caption)]',
+        md: 'h-7 px-2.5 [font-size:var(--text-body-sm)]',
       },
     },
     defaultVariants: {

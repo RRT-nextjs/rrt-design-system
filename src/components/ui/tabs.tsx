@@ -48,7 +48,7 @@ export const TabsTrigger = React.forwardRef<
     className={cn(
       'inline-flex items-center justify-center whitespace-nowrap',
       'rounded-[var(--radius-md)] px-3 py-1.5',
-      'text-[var(--text-body-sm)] font-semibold',
+      '[font-size:var(--text-body-sm)] font-semibold',
       'ring-offset-background',
       'transition-all duration-[var(--motion-duration-fast)]',
       'focus-visible:outline-none focus-visible:shadow-[var(--shadow-focus)]',
