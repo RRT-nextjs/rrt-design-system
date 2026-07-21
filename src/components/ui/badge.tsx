@@ -43,8 +43,17 @@ const badgeVariants = cva(
         ],
       },
       size: {
-        sm: 'h-5 px-2 text-[var(--text-caption)]',
-        md: 'h-6 px-2.5 text-[var(--text-body-sm)]',
+        // Font-size must stay in the property-arbitrary form used below. The
+        // shorter text-prefixed shorthand is ambiguous (font-size vs text
+        // color): Tailwind v4 compiles it to an invalid color declaration and
+        // tailwind-merge groups it with the variant's real text-color class
+        // and drops the color, so badges inherit the parent font size and
+        // lose their variant color. Same fix as buttonVariants' sizes; see
+        // that comment in button.tsx for why neither form may appear in
+        // comments as literal class text (Tailwind's extractor scans dist
+        // comments for candidates).
+        sm: 'h-5 px-2 [font-size:var(--text-caption)]',
+        md: 'h-6 px-2.5 [font-size:var(--text-body-sm)]',
       },
     },
     defaultVariants: {
