@@ -17,8 +17,8 @@ export const colors = {
   surface: '#FFFBF3',
   surfaceHover: '#F0E9DA',
   surfaceSunken: '#EFE7D6',
-  line: '#C9BEAA',
-  lineStrong: '#9C907A',
+  line: '#948C7D',
+  lineStrong: '#776E5D',
   text: '#2A1F18',
   textSoft: '#5A4F44',
   textFaint: '#7A6E5C',
@@ -31,7 +31,7 @@ export const colors = {
   maroon50: '#F3E5E3',
   // Gold (restricted)
   gold500: '#D4AF37',
-  gold700: '#8A6F1D',
+  gold700: '#866C1C',
   // Cream / dark theme
   cream50: '#FFFBF3',
   cream100: '#F8F1E0',
@@ -39,7 +39,7 @@ export const colors = {
   // Semantic
   success: '#2D7A4A',
   successBg: '#E3F1E8',
-  warning: '#B06B00',
+  warning: '#9E6000',
   warningBg: '#FBF1DC',
   error: '#B3261E',
   errorBg: '#FBE5E3',

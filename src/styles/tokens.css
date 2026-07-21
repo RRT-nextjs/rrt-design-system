@@ -2,11 +2,16 @@
  * @rrt-nextjs/design-system - tokens.css
  * ----------------------------------------------------------------------------
  * The single source of truth for RRT design tokens. Distributed as a CSS file
- * consumed by both rrt-app and rrt-nextjs via Tailwind v4's `@theme` block.
+ * and consumed by rrt-studio (operations app) via Tailwind v4's `@theme` block.
  *
- * Every color token names its measured WCAG contrast ratio against the canvas
- * it lives on. Tokens that failed the critique 04 a11y audit have been replaced
- * with measured passes (NOT patched on top of failing values).
+ * Every color token names its WCAG 2.1 contrast ratio against the canvas it
+ * lives on, recomputed with the standard sRGB relative-luminance formula.
+ * The 2026-07-21 adversarial recomputation found the previous annotations
+ * unreliable: four tokens claimed passes they did not have (line, line-strong,
+ * warning, gold-700) and were REPLACED with measured passes; every other
+ * stale number was corrected in place. The annotations are enforced by
+ * src/styles/tokens-contrast.test.ts, which re-derives each claimed ratio
+ * from the declared hex values and fails on any drift.
  *
  * Tailwind v4 reads `@theme` and auto-derives utility classes from the tokens.
  * Consumer apps import this file ONCE at the top of their globals.css:
@@ -22,92 +27,94 @@
   /* ------------------------------------------------------------------------
    * 1.1.a Neutrals (the canvas)
    * --------------------------------------------------------------------- */
-  --color-rrt-bg: #F7F3EE;                  /* 5.84:1 vs --rrt-text (passes AA Normal 4.5:1) */
-  --color-rrt-surface: #FFFBF3;             /* 6.21:1 vs --rrt-text (passes AA Normal) */
-  --color-rrt-surface-hover: #F0E9DA;       /* 5.41:1 vs --rrt-text (passes AA) */
-  --color-rrt-surface-sunken: #EFE7D6;      /* 5.20:1 vs --rrt-text */
-  --color-rrt-line: #C9BEAA;                /* 3.02:1 vs --rrt-bg (passes 1.4.11 Non-Text Contrast). Replaces failing #E4DDD0 at 1.26:1 (critique 04 Failure 1). */
-  --color-rrt-line-strong: #9C907A;         /* 4.51:1 vs --rrt-bg */
-  --color-rrt-text: #2A1F18;                /* 12.61:1 vs --rrt-bg (passes AAA) */
-  --color-rrt-text-soft: #5A4F44;           /* 7.04:1 vs --rrt-bg (passes AAA Large, AA Normal) */
-  --color-rrt-text-faint: #7A6E5C;          /* 4.62:1 vs --rrt-bg (passes AA Normal). FLOOR for any visible text. */
+  --color-rrt-bg: #F7F3EE;                  /* 14.54:1 vs --rrt-text (passes AAA) */
+  --color-rrt-surface: #FFFBF3;             /* 15.56:1 vs --rrt-text (passes AAA) */
+  --color-rrt-surface-hover: #F0E9DA;       /* 13.29:1 vs --rrt-text (passes AAA) */
+  --color-rrt-surface-sunken: #EFE7D6;      /* 13.06:1 vs --rrt-text (passes AAA) */
+  --color-rrt-line: #948C7D;                /* 3.01:1 vs --rrt-bg, 3.23:1 vs --rrt-surface (passes 1.4.11 Non-Text Contrast 3:1). Not a component boundary on sunken canvases (2.71:1 against surface-sunken). Replaces #C9BEAA, whose 3.02:1 claim measured 1.66:1 (2026-07-21 recomputation). */
+  --color-rrt-line-strong: #776E5D;         /* 4.56:1 vs --rrt-bg (passes AA Normal 4.5:1). Boundary token for checkbox, radio, and switch. Replaces #9C907A, whose 4.51:1 annotation measured 2.84:1 (2026-07-21 recomputation). */
+  --color-rrt-text: #2A1F18;                /* 14.54:1 vs --rrt-bg (passes AAA) */
+  --color-rrt-text-soft: #5A4F44;           /* 7.21:1 vs --rrt-bg (passes AAA) */
+  --color-rrt-text-faint: #7A6E5C;          /* 4.51:1 vs --rrt-bg (passes AA Normal 4.5:1 with no margin). FLOOR for any visible text. */
 
   /* ------------------------------------------------------------------------
    * 1.1.b Primary - Maroon (brand)
    * --------------------------------------------------------------------- */
   --color-rrt-maroon-900: #3A1F1C;          /* 14.61:1 vs --rrt-cream-50 (passes AAA on dark theme) */
-  --color-rrt-maroon-800: #5D2F2A;          /* 10.68:1 vs --rrt-bg (passes AAA) */
-  --color-rrt-maroon-700: #7A2E2E;          /* 9.30:1 vs --rrt-bg (passes AAA). FOCUS RING COLOR. */
-  --color-rrt-maroon-500: #8B463F;          /* 6.04:1 vs --rrt-bg (passes AA) */
-  --color-rrt-maroon-300: #B07A75;          /* 3.16:1 vs --rrt-bg (passes 1.4.11 for UI; do NOT use for text smaller than 18pt regular / 14pt bold) */
-  --color-rrt-maroon-50: #F3E5E3;           /* 1.16:1 vs --rrt-bg (background-only token, no text contrast claim) */
+  --color-rrt-maroon-800: #5D2F2A;          /* 9.98:1 vs --rrt-bg (passes AAA) */
+  --color-rrt-maroon-700: #7A2E2E;          /* 8.42:1 vs --rrt-bg (passes AAA). FOCUS RING COLOR. */
+  --color-rrt-maroon-500: #8B463F;          /* 6.24:1 vs --rrt-bg (passes AA Normal) */
+  --color-rrt-maroon-300: #B07A75;          /* 3.23:1 vs --rrt-bg (passes 1.4.11 for UI; do NOT use for text smaller than 18pt regular / 14pt bold) */
+  --color-rrt-maroon-50: #F3E5E3;           /* 1.11:1 vs --rrt-bg (background-only token, no text contrast claim) */
 
   /* ------------------------------------------------------------------------
    * 1.1.c Accent - Gold (RESTRICTED to maroon-only backgrounds)
-   * gold-300/500 fail on cream (1.57:1 / 2.04:1). Demoted per critique 04.
+   * gold-500 fails on cream (see its line). Demoted per critique 04.
    * --------------------------------------------------------------------- */
-  --color-rrt-gold-500: #D4AF37;            /* 7.17:1 vs --rrt-maroon-900 (passes AAA on dark theme). 2.04:1 vs --rrt-bg (FAILS - PROHIBITED on cream). */
-  --color-rrt-gold-700: #8A6F1D;            /* 4.71:1 vs --rrt-bg (passes AA Normal). The only gold cleared for text on cream; use sparingly, maroon preferred. */
+  --color-rrt-gold-500: #D4AF37;            /* 7.17:1 vs --rrt-maroon-900 (passes AAA on dark theme). 1.90:1 vs --rrt-bg (FAILS on cream - PROHIBITED for any cream-canvas use). */
+  --color-rrt-gold-700: #866C1C;            /* 4.55:1 vs --rrt-bg (passes AA Normal). The only gold cleared for text on cream; use sparingly, maroon preferred. Replaces #8A6F1D, whose 4.71:1 annotation measured 4.35:1 (2026-07-21 recomputation). */
 
   /* ------------------------------------------------------------------------
    * 1.1.d Cream / Dark theme
    * --------------------------------------------------------------------- */
   --color-rrt-cream-50: #FFFBF3;            /* 14.61:1 vs --rrt-maroon-900 (passes AAA) */
-  --color-rrt-cream-100: #F8F1E0;           /* 13.04:1 vs --rrt-maroon-900 (passes AAA) */
-  --color-rrt-cream-300: #E5DBC6;           /* 9.42:1 vs --rrt-maroon-900 (passes AAA) */
+  --color-rrt-cream-100: #F8F1E0;           /* 13.39:1 vs --rrt-maroon-900 (passes AAA) */
+  --color-rrt-cream-300: #E5DBC6;           /* 10.97:1 vs --rrt-maroon-900 (passes AAA) */
 
   /* ------------------------------------------------------------------------
    * 1.1.e Semantic
+   * Every semantic fg clears AA Normal on the canvas AND on its own -bg tint
+   * (recomputed 2026-07-21).
    * --------------------------------------------------------------------- */
-  --color-rrt-success: #2D7A4A;             /* 5.06:1 vs --rrt-bg (passes AA). Distinct from gold to avoid color-only success encoding. */
-  --color-rrt-success-bg: #E3F1E8;          /* 1.10:1 vs --rrt-bg (background-only) */
-  --color-rrt-warning: #B06B00;             /* 4.92:1 vs --rrt-bg (passes AA). Replaces failing amber #1.88:1 (critique 04 Failure 1). */
-  --color-rrt-warning-bg: #FBF1DC;          /* 1.09:1 vs --rrt-bg (background-only) */
-  --color-rrt-error: #B3261E;               /* 6.07:1 vs --rrt-bg (passes AA). Replaces failing destructive #c84e3e at 4.25:1 (critique 04 Failure 1). */
-  --color-rrt-error-bg: #FBE5E3;            /* 1.12:1 vs --rrt-bg (background-only) */
-  --color-rrt-info: #0F5BA8;                /* 6.74:1 vs --rrt-bg (passes AA) */
+  --color-rrt-success: #2D7A4A;             /* 4.76:1 vs --rrt-bg, 4.51:1 vs --rrt-success-bg (passes AA Normal 4.5:1, with no margin on the tint). Distinct from gold to avoid color-only success encoding. */
+  --color-rrt-success-bg: #E3F1E8;          /* 1.06:1 vs --rrt-bg (background-only) */
+  --color-rrt-warning: #9E6000;             /* 4.61:1 vs --rrt-bg, 4.54:1 vs --rrt-warning-bg (passes AA Normal 4.5:1 on canvas and on its own tint). Replaces #B06B00, whose 4.92:1 claim measured 3.84:1, and 3.78:1 on the tint (2026-07-21 recomputation). */
+  --color-rrt-warning-bg: #FBF1DC;          /* 1.02:1 vs --rrt-bg (background-only) */
+  --color-rrt-error: #B3261E;               /* 5.92:1 vs --rrt-bg, 5.42:1 vs --rrt-error-bg (passes AA Normal). Replaces failing destructive #C84E3E, measured 4.12:1 (critique 04). */
+  --color-rrt-error-bg: #FBE5E3;            /* 1.09:1 vs --rrt-bg (background-only) */
+  --color-rrt-info: #0F5BA8;                /* 6.17:1 vs --rrt-bg, 5.75:1 vs --rrt-info-bg (passes AA Normal) */
   --color-rrt-info-bg: #E3EDF8;             /* 1.07:1 vs --rrt-bg (background-only) */
 
   /* ------------------------------------------------------------------------
    * 1.1.f Program tones
-   * All five tone-text values pre-audited at AAA on tone-bg. The fallback
-   * tone is kept verbatim from rrt-app's existing program-tone.ts
-   * (audited at 11.42:1 during the recent close-out).
+   * All six tone-text values measure AAA on their tone-bg (recomputed
+   * 2026-07-21). The fallback tone is kept verbatim from the legacy
+   * program-tone map.
    * Every ProgramChip MUST render the 2-letter prefix per WCAG 1.4.1.
    * --------------------------------------------------------------------- */
 
   /* Preschool (PS) */
-  --color-rrt-program-preschool-bg: #F0E7FB;       /* 9.18:1 text-on-bg, passes AAA */
+  --color-rrt-program-preschool-bg: #F0E7FB;       /* 8.93:1 text-on-bg (passes AAA) */
   --color-rrt-program-preschool-border: #9A7AD0;
   --color-rrt-program-preschool-text: #4A2E7A;
   --color-rrt-program-preschool-dot: #9A7AD0;
 
   /* Beginners (BG) */
-  --color-rrt-program-beginners-bg: #E2EFEF;       /* 9.71:1 text-on-bg, passes AAA */
+  --color-rrt-program-beginners-bg: #E2EFEF;       /* 8.42:1 text-on-bg (passes AAA) */
   --color-rrt-program-beginners-border: #5D9A8E;
   --color-rrt-program-beginners-text: #1F4A42;
   --color-rrt-program-beginners-dot: #5D9A8E;
 
   /* Competitive (CM) */
-  --color-rrt-program-competitive-bg: #FBE6E2;     /* 8.34:1 text-on-bg, passes AAA */
+  --color-rrt-program-competitive-bg: #FBE6E2;     /* 7.78:1 text-on-bg (passes AAA) */
   --color-rrt-program-competitive-border: #C97565;
   --color-rrt-program-competitive-text: #7A2E29;
   --color-rrt-program-competitive-dot: #C97565;
 
   /* Flexibility (FL) */
-  --color-rrt-program-flexibility-bg: #FBE9B3;     /* 8.61:1 text-on-bg, passes AAA */
+  --color-rrt-program-flexibility-bg: #FBE9B3;     /* 7.75:1 text-on-bg (passes AAA) */
   --color-rrt-program-flexibility-border: #A87B1F;
   --color-rrt-program-flexibility-text: #5A4310;
   --color-rrt-program-flexibility-dot: #A87B1F;
 
   /* Ballet (BA) */
-  --color-rrt-program-ballet-bg: #D5E3F7;          /* 13.42:1 text-on-bg, passes AAA */
+  --color-rrt-program-ballet-bg: #D5E3F7;          /* 11.39:1 text-on-bg (passes AAA) */
   --color-rrt-program-ballet-border: #3F63AB;
   --color-rrt-program-ballet-text: #14274A;
   --color-rrt-program-ballet-dot: #3F63AB;
 
-  /* Fallback (no program) - existing rrt-app values, audited at 11.42:1 */
-  --color-rrt-program-fallback-bg: #FFF1E3;        /* 11.42:1 text-on-bg, passes AAA */
+  /* Fallback (no program) - legacy program-tone values. Its old 11.42:1 audit note measured 10.93:1. */
+  --color-rrt-program-fallback-bg: #FFF1E3;        /* 10.93:1 text-on-bg (passes AAA) */
   --color-rrt-program-fallback-border: #8A6F4D;
   --color-rrt-program-fallback-text: #3E342C;
   --color-rrt-program-fallback-dot: #8A6F4D;
@@ -115,12 +122,13 @@
   /* ------------------------------------------------------------------------
    * 1.1.g Status colors (kiosk + admin states)
    * All status colors paired with a non-color indicator per WCAG 1.4.1.
+   * The floor for these state colors is 1.4.11's 3:1; every value clears it.
    * --------------------------------------------------------------------- */
-  --color-rrt-status-checkedin: #2D7A4A;    /* 5.06:1 vs --rrt-bg (3:1 floor for UI states) */
-  --color-rrt-status-late: #B06B00;         /* 4.92:1 vs --rrt-bg */
-  --color-rrt-status-absent: #7A6E5C;       /* 4.62:1 vs --rrt-bg (intentionally low - absence is the absence of color) */
-  --color-rrt-status-pending: #5A4F44;      /* 7.04:1 vs --rrt-bg */
-  --color-rrt-status-flag: #B3261E;         /* 6.07:1 vs --rrt-bg (staff-only, NEVER on kiosk) */
+  --color-rrt-status-checkedin: #2D7A4A;    /* 4.76:1 vs --rrt-bg (passes 1.4.11). Tracks --rrt-success. */
+  --color-rrt-status-late: #9E6000;         /* 4.61:1 vs --rrt-bg (passes 1.4.11). Tracks --rrt-warning. */
+  --color-rrt-status-absent: #7A6E5C;       /* 4.51:1 vs --rrt-bg (passes 1.4.11; intentionally muted - absence is the absence of color) */
+  --color-rrt-status-pending: #5A4F44;      /* 7.21:1 vs --rrt-bg (passes 1.4.11) */
+  --color-rrt-status-flag: #B3261E;         /* 5.92:1 vs --rrt-bg (passes 1.4.11; staff-only, NEVER on kiosk) */
 
   /* ------------------------------------------------------------------------
    * 1.2 Typography (font families + sizes)
@@ -215,9 +223,9 @@
   --shadow-md: 0 4px 6px -1px rgba(58, 31, 28, 0.08), 0 2px 4px -2px rgba(58, 31, 28, 0.04);
   --shadow-lg: 0 10px 15px -3px rgba(58, 31, 28, 0.10), 0 4px 6px -4px rgba(58, 31, 28, 0.06);
   --shadow-xl: 0 20px 25px -5px rgba(58, 31, 28, 0.12), 0 8px 10px -6px rgba(58, 31, 28, 0.05);
-  /* Universal focus ring: maroon-700 against cream = 9.30:1 (3x WCAG 1.4.11). */
+  /* Universal focus ring: maroon-700 against cream, 8.42:1 (see --color-rrt-maroon-700; comfortably above the 1.4.11 3:1 floor). */
   --shadow-focus: 0 0 0 2px #F7F3EE, 0 0 0 4px #7A2E2E;
-  /* Dark-theme focus ring: gold-500 against maroon-900 = 7.17:1. */
+  /* Dark-theme focus ring: gold-500 against maroon-900, 7.17:1 (see --color-rrt-gold-500). */
   --shadow-focus-dark: 0 0 0 2px #3A1F1C, 0 0 0 4px #D4AF37;
 
   /* ------------------------------------------------------------------------
@@ -266,6 +274,9 @@
  * styled with `bg-[--color-rrt-surface]` works on both themes without code
  * changes.
  *
+ * Alpha borders are composited over maroon-900 before measuring, matching
+ * browser rendering.
+ *
  * Reference: docs/spec/01-design-system.md §6
  * ============================================================================ */
 [data-theme="dark"] {
@@ -273,12 +284,12 @@
   --color-rrt-surface: #5D2F2A;             /* maroon-800 card */
   --color-rrt-surface-hover: #7A2E2E;       /* maroon-700 hover */
   --color-rrt-surface-sunken: #2E1815;      /* darker than canvas */
-  --color-rrt-line: rgba(245, 235, 220, 0.18); /* maroon-tinted cream border */
-  --color-rrt-line-strong: rgba(245, 235, 220, 0.32);
-  --color-rrt-text: #FFFBF3;                /* cream-50: 14.61:1 vs maroon-900 (AAA) */
-  --color-rrt-text-soft: #E5DBC6;           /* cream-300: 9.42:1 vs maroon-900 (AAA) */
-  --color-rrt-text-faint: rgba(245, 235, 220, 0.62); /* tertiary, AA at ~4.6:1 */
-  --shadow-focus: 0 0 0 2px #3A1F1C, 0 0 0 4px #D4AF37; /* gold-500 on maroon-900 = 7.17:1 */
+  --color-rrt-line: rgba(245, 235, 220, 0.18); /* maroon-tinted cream border; composites to 1.69:1 vs --rrt-maroon-900 (decorative only - below the 1.4.11 3:1 boundary floor) */
+  --color-rrt-line-strong: rgba(245, 235, 220, 0.32); /* composites to 2.58:1 vs --rrt-maroon-900 (below the 1.4.11 3:1 boundary floor; known dark-theme gap) */
+  --color-rrt-text: #FFFBF3;                /* cream-50: 14.61:1 vs --rrt-maroon-900 (passes AAA) */
+  --color-rrt-text-soft: #E5DBC6;           /* cream-300: 10.97:1 vs --rrt-maroon-900 (passes AAA) */
+  --color-rrt-text-faint: rgba(245, 235, 220, 0.62); /* composites to 5.78:1 vs --rrt-maroon-900 (passes AA Normal) */
+  --shadow-focus: 0 0 0 2px #3A1F1C, 0 0 0 4px #D4AF37; /* gold-500 on maroon-900, 7.17:1 (see --color-rrt-gold-500) */
 }
 
 /* ============================================================================
