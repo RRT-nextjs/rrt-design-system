@@ -12,7 +12,7 @@ The single source of truth for RRT brand: tokens, primitives, and brand assets. 
 
 ## Versioning
 
-Semver. Pre-1.0 we may ship breaking changes in minor bumps; both consumer apps pin to `~0.1.x`. After stabilizing across Slices 1-3, the package goes to `1.0.0`.
+Semver for reference, but both consumers (rrt-studio and rrt-app) pin exact GitHub commit references, so a consumer moves only when its pin is deliberately bumped. Pre-1.0 we may ship breaking changes in minor bumps.
 
 A change is **breaking** if:
 - A primitive's prop name changes.
@@ -45,7 +45,7 @@ Once published to GitHub Packages, each consumer repo will:
    pnpm add @rrt-nextjs/design-system
    ```
 
-For the current Slice 1 phase, this package is consumed **locally** via a relative file path or `pnpm link`. See the Local development section below.
+The consumers (rrt-studio and rrt-app) install this package via pinned GitHub commit references. For local iteration, `pnpm link` still works - see Local development below.
 
 ---
 
@@ -224,7 +224,7 @@ The 2026-07-21 adversarial recomputation found that four critique 04 "measured p
 
 ## Local development
 
-This package lives at `/Users/maxella/Desktop/projects/rrt-design-system/` (sibling to `rrt-app` and `rrt-nextjs`). During Slice 1 we develop locally and consume via `pnpm link` or a `file:` reference in the consumer apps.
+This package lives at `/Users/maxella/Desktop/projects/rrt-design-system/` (sibling to the consumer apps `rrt-studio` and `rrt-app`). For local iteration, develop here and consume via `pnpm link` or a `file:` reference; the committed consumer pins remain GitHub commit references.
 
 ### Scripts
 
