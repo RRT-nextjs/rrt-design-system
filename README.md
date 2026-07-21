@@ -1,6 +1,6 @@
 # @rrt-nextjs/design-system
 
-The single source of truth for RRT brand: tokens, primitives, and brand assets. Consumed by [`rrt-studio`](https://github.com/RRT-nextjs/rrt-studio) (operations) via a pinned GitHub commit reference. The marketing site (`rrt-nextjs`) does not consume this package.
+The single source of truth for RRT brand: tokens, primitives, and brand assets. Consumed by [`rrt-studio`](https://github.com/RRT-nextjs/rrt-studio) (operations) and [`rrt-app`](https://github.com/RRT-nextjs/rrt-app) (front desk), each via a pinned GitHub commit reference. The marketing site (`rrt-nextjs`) does not consume this package.
 
 **This package is private** and distributed via GitHub Packages. It is not published to public npm.
 
