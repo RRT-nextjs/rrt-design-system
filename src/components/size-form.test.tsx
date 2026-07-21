@@ -23,7 +23,10 @@ function listSourceFiles(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {
     const full = join(dir, name);
     if (statSync(full).isDirectory()) return listSourceFiles(full);
-    if (!/\.(ts|tsx)$/.test(name) || /\.test\./.test(name)) return [];
+    // EVERY production file, whatever the extension (round-2 finding: CSS or
+    // future JS could carry the forbidden form too) - only tests are excluded,
+    // because they assert the ambiguous spelling's absence by quoting it.
+    if (/\.test\./.test(name)) return [];
     return [full];
   });
 }
@@ -50,7 +53,7 @@ describe("representative merge regressions (size + real text color survive cn)",
     expect(el.className).toMatch(/text-\[var\(--color-rrt-[a-z0-9-]+\)\]/);
   });
 
-  it("ProgramChip keeps the property-arbitrary caption size at sm", () => {
+  it("ProgramChip carries the property-arbitrary caption size (size form only - its tone colors are inline styles by design and never enter cn(), so Pill and Input are the genuine merge cases)", () => {
     render(<ProgramChip data-testid="chip" programId="preschool" size="sm" />);
     const el = screen.getByTestId("chip");
     expect(el.className).toContain("[font-size:var(--text-caption)]");
