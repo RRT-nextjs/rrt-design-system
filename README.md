@@ -1,6 +1,6 @@
 # @rrt-nextjs/design-system
 
-The single source of truth for RRT brand: tokens, primitives, and brand assets. Consumed by [`rrt-app`](https://github.com/RRT-nextjs/rrt-app) (operations) and [`rrt-nextjs`](https://github.com/RRT-nextjs/rrt-nextjs) (marketing site).
+The single source of truth for RRT brand: tokens, primitives, and brand assets. Consumed by [`rrt-studio`](https://github.com/RRT-nextjs/rrt-studio) (operations) via a pinned GitHub commit reference. The marketing site (`rrt-nextjs`) does not consume this package.
 
 **This package is private** and distributed via GitHub Packages. It is not published to public npm.
 
@@ -152,7 +152,18 @@ export function ClassRoster({ kids }) {
 | Motion | `--motion-duration-{instant,fast,normal,slow,celebration}`, `--motion-ease-*` |
 | Icon sizes | `--icon-size-{sm,md,lg,xl}` |
 
-Every color token has its measured WCAG contrast ratio noted as a CSS comment in `src/styles/tokens.css`. The failing tokens identified in critique 04 (`--rrt-line` at 1.26:1, gold-300/500 on cream, amber, destructive at 4.25:1) are replaced with measured passes (3.02:1, gold demoted to maroon-only, amber at 4.92:1, destructive at 6.07:1).
+Every color token has its WCAG contrast ratio noted as a CSS comment in `src/styles/tokens.css`, recomputed with the standard sRGB relative-luminance formula and enforced by `src/styles/tokens-contrast.test.ts`, which re-derives every annotated ratio from the declared values and fails on drift.
+
+The 2026-07-21 adversarial recomputation found that four critique 04 "measured passes" were not real passes and replaced their values:
+
+| Token | Old value | Claimed | Measured | New value | Measured |
+|---|---|---|---|---|---|
+| `--rrt-line` | `#C9BEAA` | 3.02:1 | 1.66:1 | `#948C7D` | 3.01:1 vs bg |
+| `--rrt-line-strong` | `#9C907A` | 4.51:1 | 2.84:1 | `#776E5D` | 4.56:1 vs bg |
+| `--rrt-warning` | `#B06B00` | 4.92:1 | 3.84:1 (3.78:1 on its tint) | `#9E6000` | 4.61:1 vs bg, 4.54:1 on its tint |
+| `--rrt-gold-700` | `#8A6F1D` | 4.71:1 | 4.35:1 | `#866C1C` | 4.55:1 vs bg |
+
+`--rrt-status-late` tracks `--rrt-warning` and moved with it. Gold-500 remains demoted to maroon-only backgrounds (1.90:1 on cream), and error remains the critique 04 replacement of destructive `#C84E3E` (measured 4.12:1), now annotated at its recomputed 5.92:1. Every other annotation was corrected in place where its number had drifted.
 
 ### Primitives (29 shipping, 2 deferred)
 
@@ -248,7 +259,8 @@ The bundle prepends a `"use client"` directive so consuming Next.js apps treat e
 
 This package is the gate between RRT and WCAG 2.1 AA / AAA compliance. Every primitive ships:
 
-- `:focus-visible` ring at 9.30:1 on cream (`--shadow-focus`), or 7.17:1 on maroon (`--shadow-focus-dark`).
+- `:focus-visible` ring at 8.42:1 on cream (`--shadow-focus`), or 7.17:1 on maroon (`--shadow-focus-dark`).
+- Known gap: the dark theme's alpha borders composite to 1.69:1 (`--rrt-line`) and 2.58:1 (`--rrt-line-strong`) on maroon-900, below the 1.4.11 3:1 boundary floor. Raising the alphas to about 0.40 / 0.55 would clear it; tracked as follow-up, owner decision pending.
 - `prefers-reduced-motion` collapses motion to 0ms and disables transforms.
 - iOS Safari auto-zoom prevention: 16px input floor on viewports under 768px (via `reset.css`).
 - ARIA roles, `aria-disabled` (not HTML `disabled`) for focus-readable disabled states, `aria-busy` for loading.
@@ -279,6 +291,7 @@ rrt-design-system/
 │   │   └── tokens.ts                     # TS constants mirroring tokens.css
 │   ├── styles/
 │   │   ├── tokens.css                    # @theme block - the source of truth
+│   │   ├── tokens-contrast.test.ts       # recomputes every annotated WCAG ratio
 │   │   ├── shadcn-tokens.css             # shadcn variable remap
 │   │   └── reset.css                     # baseline rules supplement
 │   └── components/
